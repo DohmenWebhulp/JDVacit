@@ -1,0 +1,1 @@
+Dit project gaat over Vacit en Symfony.
