@@ -61,10 +61,14 @@ class SollicitatieRepository extends ServiceEntityRepository
     }
 
     public function verstuurUitnodiging($soll_id) {
-        $sol =$this->find($soll_id);
+
+        $sol = $this->find($soll_id);
         $sol->setUitnodiging(true);
+        
         $this->_em->persist($sol);
         $this->_em->flush();
+
+        return($sol);
     }
 
     // /**

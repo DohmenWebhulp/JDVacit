@@ -36,13 +36,19 @@ class ProfielWNController extends AbstractController
         dd($sols);
     }
 
-    public function bijwerkenProfiel(){//Mijn_ProfielWN->Form Controller
+    public function ophalenProfiel(){//Mijn ProfielWN
+
+        $data = $this->us->ophalenUser($user_id);
+        dd($data);
+    }
+
+    public function bijwerkenProfiel(){//Mijn_ProfielWN
 
         $this->us->toevoegenUser();
         $this->ss->toevoegenSollicitatie();
     }
 
-    public function registreren(){//Registratiepagina->Form Controller
+    public function registreren(){//Registratiepagina
 
         $this->us->toevoegenUser();
     }

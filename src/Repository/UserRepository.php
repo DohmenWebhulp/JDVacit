@@ -36,6 +36,40 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    public function ophalenUser($user_id){
+
+        $user = $this->find($user_id);
+
+        return($user);
+    }
+
+    public function opslaanUser($user){
+
+        if(isset($user["id"])){
+            $user = $this->find($user["id"]);
+        }else{
+            $user = new User();
+        }
+        
+        $em = $this->getEntityManager();
+
+        $user->setEmail($user["email"]);
+        $user->setRoles($user["roles"]);
+        $user->setPassword($user["password"]);
+        $user->setRecordType($user["record_type"]);
+        $user->setGebruikersnaam($user["gebruikersnaam"]);
+        $user->setAdres($user["adres"]);
+        $user->setGeboortedatum($user["geboortedatum"]);
+        $user->setTelefoonnummer($user["telefoonnummer"]);
+        $user->setPostcode($user["postcode"]);
+        $user->setWoonplaats($user["woonplaats"]);
+
+        $em->persist($sollicitatie);
+        $em->flush();
+
+        return($sollicitatie);
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

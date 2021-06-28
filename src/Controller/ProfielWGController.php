@@ -31,7 +31,13 @@ class ProfielWGController extends AbstractController
         
     }
 
-    public function bijwerkenProfiel(){//Mijn_ProfielWG->Form Controller
+    public function ophalenProfiel(){//Mijn ProfielWG
+
+        $data = $this->us->ophalenUser($user_id);
+        dd($data);
+    }
+
+    public function bijwerkenProfiel(){//Mijn_ProfielWG
 
         $this->us->toevoegenUser();
     }

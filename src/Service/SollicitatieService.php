@@ -48,16 +48,8 @@ class SollicitatieService{
     }
 
     public function updateSollicitatie($soll_id){
-
-        $soll = $this->sollRep->find($soll_id);
-        $soll = (array) $soll;
-
-        $soll["uitnodiging"] = true;
-
-        $userWN = $this->uRep->find($soll["user_wn_id"]);
-        $vacature = $this->vacRep->find($soll["vacature_id"]);
         
-        $data = $this->sollRep->opslaanSollicitatie($soll, $userWN, $vacature);
+        $data = $this->sollRep->verstuurUitnodiging($soll_id);
 
         return($data);
     }

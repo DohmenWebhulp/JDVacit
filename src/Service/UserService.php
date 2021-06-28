@@ -14,7 +14,17 @@ class UserService{
         $this->uRep = $em->getRepository(User::class);
     }
 
-    public function toevoegenUser(){
+    public function toevoegenUser($user){
+
+        $new_user = $this->uRep->opslaanUser($user);
         
+        return($new_user);
+    }
+
+    public function ophalenUser($user_id){
+
+        $user = $this->uRep-ophalenUser($user_id);
+
+        return($user);
     }
 }
