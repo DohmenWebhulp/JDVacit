@@ -27,17 +27,20 @@ class ProfielWNController extends AbstractController
         
     }
     /**
-     * @Route("/profielWN", name="profielWN")
+     * @Route("/profielWN/sol", name="sol")
      */
     public function ophalenSollicitatie(){//Mijn_Sollicitaties
 
-        $user_wn_id = 2;
+        $user_wn_id = 1;
         $sols = $this->ss->ophalenSollicitatiePerGebruiker($user_wn_id);
         dd($sols);
     }
-
+    /**
+     * @Route("/profielWN/prof", name="profiel")
+     */
     public function ophalenProfiel(){//Mijn ProfielWN
 
+        $user_id = 1;
         $data = $this->us->ophalenUser($user_id);
         dd($data);
     }
@@ -58,12 +61,12 @@ class ProfielWNController extends AbstractController
     public function solliciteerDirect(){//Detailpage
 
         $soll = array(
-            "cv" => "CV4",
-            "motivatie" => "Motivatie4",
+            "cv" => "Cv 3",
+            "motivatie" => "Motivatie 3",
             "uitnodiging" => false,
             "datum" => new \DateTime("2021-06-24 09:30:00"),
-            "user_wn_id" => "3",
-            "vacature_id" => "2"
+            "user_wn_id" => "1",
+            "vacature_id" => "3"
         );
 
         $data = $this->ss->toevoegenSollicitatie($soll);

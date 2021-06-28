@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dit is de Homepage!{% endblock %}
+{% block title %}Dit is de Detailpage!{% endblock %}
 
 {% block body %}
 <style>
@@ -27,15 +27,11 @@
                 Plaatje
             </div>
             <div class="column-md-6">
-                {% for vacature in data %}
-                    <h2>{{vacature.titel}}</h2>
-                    <div>{{vacature.omschrijving}}<br>
-                    <a href="{{ path('detailpage') }}">Link to Detailpage</a></div>
-                {% endfor %}
+                {{data.titel}}
             </div>
         </div>
     </div>
-    <h1>Hello World! ✅</h1>
+    <h1>This is the detailpage! ✅</h1>
 
     This friendly message is coming from:
     <ul>

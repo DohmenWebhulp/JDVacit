@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use App\Service\VacatureService;
 use App\Service\UserService;
@@ -31,7 +32,8 @@ class HomepageController extends AbstractController
     public function ophalenVacatures(){//Homepage
 
         $data = $this->vs->selecteerNieuwsteVijfVacatures();
-        dd($data);
+
+        return($this->render('homepage/index.html.twig', ['data' => $data]));
     }
 
     /**
@@ -39,9 +41,10 @@ class HomepageController extends AbstractController
      */
     public function ophalenVacatureOpID(){//Detailpage
 
-        $vac_id = 12;
+        $vac_id = 1;
         $data = $this->vs->ophalenVacature($vac_id);
         $data2 = $data->getUserWG()->getVacatures();
-        dd($data2);
+
+        return($this->render('homepage/detailpage.html.twig', ['data' => $data]));
     }
 }

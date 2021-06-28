@@ -26,10 +26,15 @@ class ImportSpreadsheetCommand extends Command{
         $this->setName('app:import-spreadsheet');
         $this->setDescription('Imports spreadsheet from Excel');
         $this->setHelp('This command allows');
+        $this->addArgument("file", InputArgument::REQUIRED, "Spreadsheet");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output){
 
-        
+        $inputFileName = $input->getArgument("file");
+        $spreadsheet = IOFactory::load($inputFileName);
+        $data = $spreadsheet->getActiveSheet();
+        $this->impService->importSheet($data);
+        return 0;
     }
 }

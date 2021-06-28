@@ -68,7 +68,7 @@ class ProfielWGController extends AbstractController
     }
 
     /**
-     * @Route("/vacsol", name="vacsol")
+     * @Route("/vacsoll", name="vacsol")
      */
     public function uitnodigingVersturen(){//Mijn_Vacatures_Sollicitaties
 
