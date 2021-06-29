@@ -9,7 +9,7 @@
 /vendor/
 /migrations/
 /translations/
-/assets/bootstrap
+/public/assets/bootstrap
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###

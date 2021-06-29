@@ -7,26 +7,14 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-        <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css" />
-
-        <link rel="stylesheet" href="assets/css_vacit/heart.css">
-
-        <link rel="stylesheet" type="text/css" href="assets/css_vacit/main.css" />
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-        <script type="text/javascript" language="javascript" src="assets/jquery/jquery-3.5.1.js"></script>
-        <script type="text/javascript" language="javascript" src="assets/bootstrap/js/bootstrap.js"></script>
 
 <div class="example-wrapper">
     <div class="container">
         <div class="row">
-            <div class="column-md-6">
+            <div class="col-md-4">
                 Plaatje
             </div>
-            <div class="column-md-6">
+            <div class="col-md-8">
                 {% for vacature in data %}
                     <h2>{{vacature.titel}}</h2>
                     <div>{{vacature.omschrijving}}<br>
@@ -35,18 +23,12 @@
             </div>
         </div>
     </div>
-    <h1>Hello World! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/JesseDSymfony/JesseDVacit/src/Controller/HomepageController.php'|file_link(0) }}">src/Controller/HomepageController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/JesseDSymfony/JesseDVacit/templates/homepage/index.html.twig'|file_link(0) }}">templates/homepage/index.html.twig</a></code></li>
-    </ul>
     <div>
         {% if user.roles[0] == "ROLE_CANDIDATE" %}
             <a href="{{ path('profielWN')}}">Mijn Profiel</a>
         {% else %}
-            <a href="{{ path('profielWG')}}">Mijn Profiel</a>
+            <div><a href="{{path('profielWG')}}">Mijn Profiel</a></div>
+            <div><a href="{{path('formvac')}}">Toevoegen Vacature</a></div>
         {% endif %}
     </div>
 </div>

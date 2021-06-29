@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use App\Service\SollicitatieService;
 use App\Service\VacatureService;
@@ -51,23 +52,35 @@ class ProfielWGController extends AbstractController
         $this->us->toevoegenUser();
     }
 
-    //Homepage met ingelogde werkgever die vacatures kan toevoegen een andere webpagina dan de standaard homepage?
+    /**
+     * @Route("/formvac", name="formvac")
+     */
+    public function redirectNaarFormulier(){//route naar formulierpagina
+
+        return($this->render('profiel_wg/vactoe.html.twig'));
+    }
 
     /**
      * @Route("/vactoe", name="vactoe")
      */
-    public function uploadVacature(){//Homepage
+    public function uploadVacature(){//na uploaden redirecten naar Homepage
 
-        $vaca = array(
-            "titel" => "Frontend developer",
-            "omschrijving" => "polkiu",
-            "niveau" => "junior",
-            "datum" => new \DateTime("2021-06-23 13:35:00"),
-            "user_wg_id" => "1"
-        );
+        $user = $this->getUser();
+        $uid = $user->getId();
+
+        //POST-variable komt hier terecht
+
+        $vaca = [
+            "titel" => $_POST['titel'],
+            "omschrijving" => $_POST['omschrijving'],
+            "niveau" => $_POST['niveau'],
+            "datum" => new \DateTime(date('Y/m/d h:i:s a', time())),
+            "user_wg_id" => $uid
+        ];
 
         $data = $this->vs->toevoegenVacature($vaca);
-        dd($data);
+
+        return($this->redirectToRoute('homepage'));
     }
 
     /**
@@ -84,9 +97,20 @@ class ProfielWGController extends AbstractController
      */
     public function ophalenVacatures(){//Mijn_Vacatures
 
-        $vac_id = 12;
-        $data = $this->vs->ophalenVacature($vac_id);
-        $data2 = $data->getUserWG()->getVacatures();
+        $user = $this->getUser();
+        $data = $user->getVacatures();
+
+        return($this->render('profiel_wg/mijn_vacatures.html.twig', ['data' => $data]));
+    }
+    /**
+     * @Route("/profielWG/vac/{vac_id}", name="mijn_vacsol")
+     */
+    public function ophalenSollicitatiesPerVacature($vac_id){
+
+        $vacature = $this->vs->ophalenVacature($vac_id);
+        $solls = $vacature->getSollicitaties();
+
+        return($this->render('profiel_wg/mijn_vacatures_sollicitaties.html.twig', ['data' => $solls]));
     }
 
     //Ophalen vacatures door werkgever gevolgd door ophalen sollicitaties horende bij die vacature?->FK relatie

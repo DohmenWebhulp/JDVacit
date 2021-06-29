@@ -31,9 +31,12 @@ class ProfielWNController extends AbstractController
      */
     public function ophalenSollicitatie(){//Mijn_Sollicitaties
 
-        $user_wn_id = 1;
-        $sols = $this->ss->ophalenSollicitatiePerGebruiker($user_wn_id);
-        dd($sols);
+        $user = $this->getUser();
+
+        //$solls = $this->ss->ophalenSollicitatiePerGebruiker($uid);
+        $solls = $user->getSollicitaties();
+
+        return($this->render('profiel_wn/mijn_sollicitaties.html.twig', ['data' => $solls]));
     }
     /**
      * @Route("/profielWN/prof", name="profielWN")
@@ -56,21 +59,30 @@ class ProfielWNController extends AbstractController
         $this->us->toevoegenUser();
     }
     /**
-     * @Route("/detailpage/sollDirect", name="sollDirect")
+     * @Route("/sollDirect", name="sollDirect")
      */
     public function solliciteerDirect(){//Detailpage
 
+        $user = $this->getUser();
+        $uid = $user->getId();
+
+        $cv = isset($_POST['cv']) ? $_POST['cv'] : "Cv Goed test";
+        $motivatie = isset($_POST['motivatie']) ? $_POST['motivatie'] : "Motivatie Goed test";
+        $vacature = isset($_POST['vacature_id']) ? $_POST['vacature_id'] : 3;
+
         $soll = array(
-            "cv" => "Cv 3",
-            "motivatie" => "Motivatie 3",
+            "cv" => $cv,
+            "motivatie" => $motivatie,
             "uitnodiging" => false,
-            "datum" => new \DateTime("2021-06-24 09:30:00"),
-            "user_wn_id" => "1",
-            "vacature_id" => "3"
+            "datum" => new \DateTime(date('Y/m/d h:i:s a', time())),
+            "user_wn_id" => $uid,
+            "vacature_id" => $vacature
         );
 
+        dd($soll);
+
         $data = $this->ss->toevoegenSollicitatie($soll);
-        dd($data);
+
     }
     /**
      * @Route("/detailpage/verwsol", name="verwsol")
@@ -82,6 +94,3 @@ class ProfielWNController extends AbstractController
         dd($data);
     }
 }
-
-//Routing lukt niet.
-//

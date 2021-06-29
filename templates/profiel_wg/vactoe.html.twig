@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfielWGController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <form action="{{path('vactoe')}}" method="POST">
+        <div style="margin-left: 50px">
+            <div style="color: black">Titel:</div>
+            <input type="text" name="titel" value="">
+        </div>
+        <div style="margin-left: 50px; margin-top: 20px">
+            <div style="color: black">Omschrijving:</div>
+            <input type="text" name="omschrijving" value="">
+        </div>
+        <div style="margin-left: 50px; margin-top: 20px">
+            <div style="color: black">Niveau:</div>
+            <input type="text" name="niveau" value="">
+        </div>
+        <div style="margin-top: 20px">
+            <input type="submit" class="btn btn-primary butn" value="Verzenden">
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -42,11 +42,12 @@ class HomepageController extends AbstractController
      */
     public function ophalenVacatureOpID($id){//Detailpage
 
+        $user = $this->ophalenUser();
         $vac_id = $id;
         $data = $this->vs->ophalenVacature($vac_id);
         $data2 = $data->getUserWG()->getVacatures();
 
-        return($this->render('homepage/detailpage.html.twig', ['data' => $data]));
+        return($this->render('homepage/detailpage.html.twig', ['data' => $data, 'user' => $user, 'data2' => $data2]));
     }
 
     public function ophalenUser(){
