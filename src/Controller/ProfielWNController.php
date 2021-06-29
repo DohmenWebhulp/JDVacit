@@ -27,7 +27,7 @@ class ProfielWNController extends AbstractController
         
     }
     /**
-     * @Route("/profielWN/sol", name="sol")
+     * @Route("/profielWN/sol", name="mijn_sol")
      */
     public function ophalenSollicitatie(){//Mijn_Sollicitaties
 
@@ -36,13 +36,13 @@ class ProfielWNController extends AbstractController
         dd($sols);
     }
     /**
-     * @Route("/profielWN/prof", name="profiel")
+     * @Route("/profielWN/prof", name="profielWN")
      */
     public function ophalenProfiel(){//Mijn ProfielWN
 
-        $user_id = 1;
-        $data = $this->us->ophalenUser($user_id);
-        dd($data);
+        $user = $this->getUser();
+
+        return($this->render('profiel_wn/mijn_profielWN.html.twig', ['user' => $user]));
     }
 
     public function bijwerkenProfiel(){//Mijn_ProfielWN

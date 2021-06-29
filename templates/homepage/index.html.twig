@@ -30,7 +30,7 @@
                 {% for vacature in data %}
                     <h2>{{vacature.titel}}</h2>
                     <div>{{vacature.omschrijving}}<br>
-                    <a href="{{ path('detailpage') }}">Link to Detailpage</a></div>
+                    <a href="{{ path('detailpage' , { 'id': vacature.id}) }}">Link to Detailpage</a></div>
                 {% endfor %}
             </div>
         </div>
@@ -42,5 +42,12 @@
         <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/JesseDSymfony/JesseDVacit/src/Controller/HomepageController.php'|file_link(0) }}">src/Controller/HomepageController.php</a></code></li>
         <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/JesseDSymfony/JesseDVacit/templates/homepage/index.html.twig'|file_link(0) }}">templates/homepage/index.html.twig</a></code></li>
     </ul>
+    <div>
+        {% if user.roles[0] == "ROLE_CANDIDATE" %}
+            <a href="{{ path('profielWN')}}">Mijn Profiel</a>
+        {% else %}
+            <a href="{{ path('profielWG')}}">Mijn Profiel</a>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

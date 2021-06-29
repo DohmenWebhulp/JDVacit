@@ -30,11 +30,14 @@ class ProfielWGController extends AbstractController
     {
         
     }
-
+    /**
+     * @Route("/profielWG/prof", name="profielWG")
+     */
     public function ophalenProfiel(){//Mijn ProfielWG
 
-        $data = $this->us->ophalenUser($user_id);
-        dd($data);
+        $user = $this->getUser();
+
+        return($this->render('profiel_wg/mijn_profielWG.html.twig', ['user' => $user]));
     }
 
     public function bijwerkenProfiel(){//Mijn_ProfielWG
@@ -51,7 +54,7 @@ class ProfielWGController extends AbstractController
     //Homepage met ingelogde werkgever die vacatures kan toevoegen een andere webpagina dan de standaard homepage?
 
     /**
-     * @Route("/profielWG", name="profielWG")
+     * @Route("/vactoe", name="vactoe")
      */
     public function uploadVacature(){//Homepage
 
@@ -68,7 +71,7 @@ class ProfielWGController extends AbstractController
     }
 
     /**
-     * @Route("/vacsoll", name="vacsol")
+     * @Route("/vacsol", name="vacsol")
      */
     public function uitnodigingVersturen(){//Mijn_Vacatures_Sollicitaties
 
@@ -76,7 +79,9 @@ class ProfielWGController extends AbstractController
         $data = $this->ss->updateSollicitatie($soll_id);
         dd($data);
     }
-
+    /**
+     * @Route("/profielWG/vac", name="mijn_vac")
+     */
     public function ophalenVacatures(){//Mijn_Vacatures
 
         $vac_id = 12;

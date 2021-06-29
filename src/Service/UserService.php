@@ -23,7 +23,7 @@ class UserService{
 
     public function ophalenUser($user_id){
 
-        $user = $this->uRep-ophalenUser($user_id);
+        $user = $this->uRep->ophalenUser($user_id);
 
         return($user);
     }

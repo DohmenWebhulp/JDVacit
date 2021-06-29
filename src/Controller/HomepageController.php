@@ -31,20 +31,28 @@ class HomepageController extends AbstractController
      */
     public function ophalenVacatures(){//Homepage
 
+        $user = $this->ophalenUser();
         $data = $this->vs->selecteerNieuwsteVijfVacatures();
 
-        return($this->render('homepage/index.html.twig', ['data' => $data]));
+        return($this->render('homepage/index.html.twig', ['data' => $data, 'user' => $user]));
     }
 
     /**
-     * @Route("/detailpage", name="detailpage")
+     * @Route("/detailpage/{id}", name="detailpage")
      */
-    public function ophalenVacatureOpID(){//Detailpage
+    public function ophalenVacatureOpID($id){//Detailpage
 
-        $vac_id = 1;
+        $vac_id = $id;
         $data = $this->vs->ophalenVacature($vac_id);
         $data2 = $data->getUserWG()->getVacatures();
 
         return($this->render('homepage/detailpage.html.twig', ['data' => $data]));
+    }
+
+    public function ophalenUser(){
+
+        $user = $this->getUser();
+
+        return($user);
     }
 }

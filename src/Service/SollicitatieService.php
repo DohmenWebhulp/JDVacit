@@ -24,6 +24,7 @@ class SollicitatieService{
 
         $user = $this->uRep->find($user_wn_id);
         $data = $this->sollRep->ophalenSollicitatiePerGebruiker($user);
+        
         return($data);
     }
 
