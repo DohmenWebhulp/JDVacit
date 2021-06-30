@@ -6,51 +6,52 @@
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    .soll {color: red}
 </style>
 
-<div class="example-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                Plaatje
-            </div>
-            <div class="col-md-6">
-                {{data.titel}}
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            Plaatje
+        </div>
+        <div class="col-md-9">
+            {{data.titel}}
         </div>
     </div>
-    <script>
+</div>
+<script>
 
-        $(document).ready(function(){
-            $('#sllctrn').click(function(){
-                $.ajax({
-                    url: "{{path('sollDirect')}}",
-                    method: "POST",
-                    data: {cv: "Cv Goed", motivatie: "Motivatie Goed", vacature_id: 2},
-                    success: function(response){}
-                })
-                $('#sllctrn').attr("value" : "Gesolliciteerd!");
+    $(document).ready(function(){
+        $('#sllctrn').click(function(){
+            $.ajax({
+                url: "{{path('sollDirect')}}",
+                method: "POST",
+                data: {cv: "Cv Goed", motivatie: "Motivatie Goed", vacature_id: {{data.id}}},
+                success: function(response){
+                    $('#sllctrn').attr("value" , "Gesolliciteerd!");
+                    $('#sllctrn').prop('disabled', true);
+                }
             })
         })
-    </script>
-    <div>
-        {% if user.roles[0] == "ROLE_CANDIDATE" %}
-            <input type="submit" id="sllctrn" value="Solliciteer Nu!">
-        {% endif %}
-    </div>
-    <h2> Meer vacatures van {{data.userWG.gebruikersnaam}}</h2>
-    <div>
-        {% for vacature in data2 %}
-            <div>
-                <span>
-                    {{vacature.titel}}
-                </span>
-                <span>
-                    {{vacature.niveau}}
-                </span>
-            </div>
-        {% endfor %}
-    </div>
+    })
+</script>
+<div>
+    {% if user.roles[0] == "ROLE_CANDIDATE" %}
+        <input type="submit" id="sllctrn" value="Solliciteer Nu!">
+    {% endif %}
+</div>
+<h2> Meer vacatures van {{data.userWG.gebruikersnaam}}</h2>
+<div>
+    {% for vacature in data2 %}
+        <div>
+            <span>
+                {{vacature.datum | date('Y/m/d')}}
+            <span>
+                {{vacature.titel}}
+            </span>
+            <span>
+                {{vacature.niveau}}
+            </span>
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}

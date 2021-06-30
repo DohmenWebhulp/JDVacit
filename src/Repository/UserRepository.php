@@ -43,31 +43,31 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return($user);
     }
 
-    public function opslaanUser($user){
+    public function opslaanUser($userA){
 
-        if(isset($user["id"])){
-            $user = $this->find($user["id"]);
+        if(isset($userA["id"])){
+            $user = $this->find($userA["id"]);
         }else{
             $user = new User();
         }
         
         $em = $this->getEntityManager();
 
-        $user->setEmail($user["email"]);
-        $user->setRoles($user["roles"]);
-        $user->setPassword($user["password"]);
-        $user->setRecordType($user["record_type"]);
-        $user->setGebruikersnaam($user["gebruikersnaam"]);
-        $user->setAdres($user["adres"]);
-        $user->setGeboortedatum($user["geboortedatum"]);
-        $user->setTelefoonnummer($user["telefoonnummer"]);
-        $user->setPostcode($user["postcode"]);
-        $user->setWoonplaats($user["woonplaats"]);
+        $user->setEmail($userA["email"]);
+        $user->setRoles($userA["roles"]);
+        $user->setPassword($userA["password"]);
+        $user->setRecordType($userA["record_type"]);
+        $user->setGebruikersnaam($userA["gebruikersnaam"]);
+        $user->setAdres($userA["adres"]);
+        $user->setGeboortedatum($userA["geboortedatum"]);
+        $user->setTelefoonnummer($userA["telefoonnummer"]);
+        $user->setPostcode($userA["postcode"]);
+        $user->setWoonplaats($userA["woonplaats"]);
 
-        $em->persist($sollicitatie);
+        $em->persist($user);
         $em->flush();
 
-        return($sollicitatie);
+        return($user);
     }
 
     // /**

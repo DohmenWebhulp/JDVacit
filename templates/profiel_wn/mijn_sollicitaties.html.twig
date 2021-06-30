@@ -8,33 +8,42 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello World! ✅</h1>
+<div>
+    {% for sollicitatie in data %}
+        <script>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/JesseDSymfony/JesseDVacit/src/Controller/ProfielWGController.php'|file_link(0) }}">src/Controller/ProfielWGController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/JesseDSymfony/JesseDVacit/templates/profiel_wg/index.html.twig'|file_link(0) }}">templates/profiel_wg/index.html.twig</a></code></li>
-    </ul>
-    <div>
-        {% for sollicitatie in data %}
-            <div>
-                <span>
-                    {{sollicitatie.id}}
-                </span>
-                <span>
-                    {{sollicitatie.vacature.titel}}
-                </span>
-                <span>
-                    {{sollicitatie.vacature.userWG.gebruikersnaam}}
-                </span>
-                <span>
-                    {% if sollicitatie.uitnodiging == 1 %}
-                        Vinkje
-                    {% endif %}
-                </span>
-            </div>
-        {% endfor %}
-    </div>
+            $(document).ready(function(){
+                $('#{{sollicitatie.ID}}sol').click(function(){
+                    $.ajax({
+                        url: "{{path('verwsol', {'soll_id' : sollicitatie.ID})}}",
+                        method: "POST",
+                        success: function(response){
+                            
+                        }
+                    })
+                    $('#{{sollicitatie.ID}}div').remove();
+                })
+            })
+        </script>
+        <div id="{{sollicitatie.ID}}div">
+            <span>
+                {{sollicitatie.id}}
+            </span>
+            <span>
+                {{sollicitatie.vacature.titel}}
+            </span>
+            <span>
+                {{sollicitatie.vacature.userWG.gebruikersnaam}}
+            </span>
+            <span>
+                {% if sollicitatie.uitnodiging == 1 %}
+                    Vinkje
+                {% endif %}
+            </span>
+            <span>
+                <input type="button" id="{{sollicitatie.ID}}sol" value="Sollicitatie Verwijderen">
+            </span>
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}

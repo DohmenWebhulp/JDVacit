@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use App\Service\SollicitatieService;
@@ -88,9 +89,10 @@ class ProfielWGController extends AbstractController
      */
     public function uitnodigingVersturen(){//Mijn_Vacatures_Sollicitaties
 
-        $soll_id = 1;
+        $soll_id = $_POST['sol_id'];
         $data = $this->ss->updateSollicitatie($soll_id);
-        dd($data);
+        
+        return new JSONResponse(['success'=>'true']);
     }
     /**
      * @Route("/profielWG/vac", name="mijn_vac")

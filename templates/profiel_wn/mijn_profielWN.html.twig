@@ -9,15 +9,10 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ user.gebruikersnaam }}! ✅</h1>
+    <h1>Hello {{ user.gebruikersnaam }}{{user.id}}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/JesseDSymfony/JesseDVacit/src/Controller/ProfielWNController.php'|file_link(0) }}">src/Controller/ProfielWNController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/JesseDSymfony/JesseDVacit/templates/profiel_wn/index.html.twig'|file_link(0) }}">templates/profiel_wn/index.html.twig</a></code></li>
-    </ul>
     <div>
-        <a href="{{path('mijn_sol')}}">Mijn Sollicitaties</a>
+        <a href="{{path('mijn_sols', { 'user_id' : user.id})}}">Mijn Sollicitaties</a>
     </div>
 </div>
 {% endblock %}

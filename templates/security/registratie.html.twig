@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registratie{% endblock %}
+
+{% block body %}
+<form action="{{path('register')}}" style="margin-left: 100px" method="POST">
+
+    <h1 class="h3 mb-3 font-weight-normal">Please register your information</h1>
+    <label for="inputEmail">Email</label>
+    <input type="text" value="" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="text" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <label for="inputGebruikersnaam">Gebruikersnaam</label>
+    <input type="text" name="gebruikersnaam" id="inputGebruikersnaam" class="form-control">
+    <label for="inputAdres">Adres</label>
+    <input type="text" name="adres" id="inputAdres" class="form-control">
+    <label for="inputGeboortedatum">Geboortedatum</label>
+    <input type="text" name="geboortedatum" id="inputGeboortedatum" class="form-control">
+    <label for="inputTelefoonnummer">Telefoonnummer</label>
+    <input type="text" name="telefoonnummer" id="inputTelefoonnummer" class="form-control">
+    <label for="inputPostcode">Postcode</label>
+    <input type="text" name="postcode" id="inputPostcode" class="form-control">
+    <label for="inputWoonplaats">Woonplaats</label>
+    <input type="text" name="woonplaats" id="inputWoonplaats" class="form-control">
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}">
+
+    <button class="btn btn-lg btn-primary" style="margin-top: 20px" type="submit">
+        Register
+    </button>
+</form>
+{% endblock %}
