@@ -8,14 +8,50 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello World! ✅</h1>
-
-    <div>
-        {% for vacature in data %}
-            <div>
-                <a href="{{ path('mijn_vacsol' , { 'vac_id': vacature.id}) }}">Link to Sollicitaties</a>
+<div class="box">
+    <div class="box-content">
+        <div class="button">
+            <a href="{{path('profielWG')}}">Mijn Profiel</a>
+            <a href="{{path('homepage')}}">Homepage</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        Plaatje
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-3 tablehead">
+                Datum vacature
             </div>
+            <div class="col-md-3 tablehead">
+                Titel
+            </div>
+            <div class="col-md-3 tablehead">
+                Aantal sollicitaties
+            </div>
+            <div class="col-md-3 tablehead">
+                Link naar sollicitaties
+            </div>
+        </div>
+        <hr>
+        {% for vacature in data %}
+            <div class="row">
+                <div class="col-md-3">
+                    {{vacature.datum | date('Y/m/d')}}
+                </div>
+                <div class="col-md-3">
+                    {{vacature.titel}}
+                </div>
+                <div class="col-md-3">
+                    {{vacature.sollicitaties | length}}
+                </div>
+                <div class="col-md-3">
+                    <a href="{{ path('mijn_vacsol' , { 'vac_id': vacature.id}) }}">Bekijk alle sollicitaties</a>
+                </div>
+            </div>
+            <hr>
         {% endfor %}
     </div>
 </div>

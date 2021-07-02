@@ -38,7 +38,7 @@ class ProfielWNController extends AbstractController
     /**
      * @Route("/profielWN/prof", name="profielWN")
      */
-    public function ophalenProfiel(){//Mijn ProfielWN
+    public function ophalenProfiel(){//Mijn_ProfielWN
 
         $user = $this->getUser();
 
@@ -47,17 +47,31 @@ class ProfielWNController extends AbstractController
     /**
      * @Route("/profielWN/profAnder/{user_id}", name="profielWNA")
      */
-    public function ophalenAnderProfiel($user_id){
+    public function ophalenAnderProfiel($user_id){//Mijn_ProfielWN
 
         $user = $this->us->ophalenUser($user_id);
 
         return($this->render('profiel_wn/mijn_profielWN.html.twig', ['user' => $user]));
     }
 
+    /**
+     * @Route("/bijwerken", name="bijwerken")
+     */
     public function bijwerkenProfiel(){//Mijn_ProfielWN
 
-        $this->us->toevoegenUser();
-        $this->ss->toevoegenSollicitatie();
+        $user = $this->userToDatabase($_POST);
+        $currentUser = $this->getUser();
+        $id = ["id" => $currentUser->getId()];
+        $userWN = array_merge($id, $user);
+
+        $user2 = $this->us->toevoegenUser($userWN);
+
+        $solls = $currentUser->getSollicitaties();
+        $soll_id = $this->sollicitatieToDatabase($solls);
+
+        $solli = $this->ss->updateMotivatie($soll_id, $_POST['motivatie']);
+
+        return($this->redirectToRoute('profielWN'));
     }
     /**
      * @Route("/registerlink", name="registerlink")
@@ -72,18 +86,7 @@ class ProfielWNController extends AbstractController
      */
     public function registreren(){//Registratiepagina
 
-        $user = [
-            'email' => $_POST['email'],
-            'roles' => ["ROLE_CANDIDATE"],
-            'password' => $_POST['password'],
-            'record_type' => 'WN',
-            'gebruikersnaam' => $_POST['gebruikersnaam'],
-            'adres' => $_POST['adres'],
-            'geboortedatum' => new \DateTime($_POST['geboortedatum']),
-            'telefoonnummer' => $_POST['telefoonnummer'],
-            'postcode' => $_POST['postcode'],
-            'woonplaats' => $_POST['woonplaats']
-        ];
+        $user = $this->userToDatabase($_POST);
 
         $userWN = $this->us->toevoegenUser($user);
 
@@ -124,5 +127,34 @@ class ProfielWNController extends AbstractController
         $data = $this->ss->verwijderSollicitatie($soll_id);
         
         return($this->redirectToRoute('mijn_sols'));
+    }
+
+    private function userToDatabase($array){
+
+        $user = [
+            'email' => $array['email'],
+            'roles' => ["ROLE_CANDIDATE"],
+            'password' => $array['password'],
+            'record_type' => 'WN',
+            'gebruikersnaam' => $array['gebruikersnaam'],
+            'adres' => $array['adres'],
+            'geboortedatum' => new \DateTime($array['geboortedatum']),
+            'telefoonnummer' => $array['telefoonnummer'],
+            'postcode' => $array['postcode'],
+            'woonplaats' => $array['woonplaats']
+        ];
+
+        return($user);
+    }
+
+    private function sollicitatieToDatabase($solls){
+
+        foreach($solls as $soll){
+
+            $soll_id = $soll->getId();
+            break;
+        }
+
+        return($soll_id);
     }
 }

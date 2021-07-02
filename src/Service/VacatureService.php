@@ -15,6 +15,7 @@ class VacatureService{
     }
 
     public function ophalenVacature($vac_id = NULL){
+
         if(!is_null($vac_id)){
             $vacs = $this->vacRep->ophalenVacature($vac_id);
         }else{
@@ -22,7 +23,6 @@ class VacatureService{
         }
 
         return($vacs);
-        
     }
 
     public function selecteerNieuwsteVijfVacatures(){

@@ -8,10 +8,36 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello World! ✅</h1>
+<div class="box">
+    <div class="box-content">
+        <div class="button">
+            <a href="{{path('mijn_vac')}}">Mijn Vacatures</a>
+            <a href="{{path('profielWG')}}">Mijn Profiel</a>
+            <a href="{{path('homepage')}}">Homepage</a>
+        </div>
+    </div>
+</div>
 
-    <div>
+<div class="row">
+    <div class="col-md-3">
+        Plaatje
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-3 tablehead">
+                Datum sollicitatie
+            </div>
+            <div class="col-md-3 tablehead">
+                Titel
+            </div>
+            <div class="col-md-3 tablehead">
+                Sollicitant
+            </div>
+            <div class="col-md-3 tablehead">
+                Uitnodigen?
+            </div>
+        </div>
+        <hr>
         {% for sollicitatie in data %}
             <script>
 
@@ -29,20 +55,21 @@
                     })
                 })
             </script>
-            <div>
-                <span>
+            <div class="row">
+                <div class="col-md-3">
                     {{sollicitatie.datum | date('Y/m/d')}}
-                </span>
-                <span>
+                </div>
+                <div class="col-md-3">
                     {{sollicitatie.vacature.titel}}
-                </span>
-                <span>
+                </div>
+                <div class="col-md-3">
                     <a href="{{path('profielWNA', {'user_id': sollicitatie.userWN.ID})}}">{{sollicitatie.userWN.gebruikersnaam}}</a>
-                </span>
-                <span>
+                </div>
+                <div class="col-md-3">
                     <input type="button" id="{{sollicitatie.ID}}tndgn" value="Uitnodigen">
-                </span>
+                </div>
             </div>
+            <hr>
         {% endfor %}
     </div>
 </div>

@@ -6,19 +6,22 @@
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    .box {width: 100%; height: 100px; background-color: #333333; color: white}
 </style>
+
 <div class="box">
-    {% if user.roles[0] == "ROLE_CANDIDATE" %}
-        <a href="{{ path('profielWN')}}">Mijn Profiel</a>
-    {% else %}
-        <div><a href="{{path('profielWG')}}">Mijn Profiel</a></div>
-        <div><a href="{{path('formvac')}}">Toevoegen Vacature</a></div>
-    {% endif %}
-    <div>
-        <a href="{{path('registerlink')}}">Registreren</a>
+    <div class="box-content">
+        <div class="button">
+        {% if user.roles[0] == "ROLE_CANDIDATE" %}
+            <a href="{{path('profielWN')}}">Mijn Profiel</a>
+        {% else %}
+            <a href="{{path('profielWG')}}">Mijn Profiel</a>
+            <a href="{{path('formvac')}}">Toevoegen Vacature</a>
+        {% endif %}
+            <a href="{{path('registerlink')}}">Registreren</a>
+        </div>
     </div>
 </div>
+
 <div class="container">
     <div class="row">
         <div class="col-md-4">

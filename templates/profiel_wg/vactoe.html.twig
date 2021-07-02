@@ -6,9 +6,17 @@
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .formu { display: flex; justify-content: center; }
 </style>
-
-<div class="example-wrapper">
+<div class="box">
+    <div class="box-content">
+        <div class="button">
+            <a href="{{path('homepage')}}">Homepage</a>
+        </div>
+    </div>
+</div>
+<div class="formu">
+    <h1>Vacature details</h1>
     <form action="{{path('vactoe')}}" method="POST">
         <div style="margin-left: 50px">
             <div style="color: black">Titel:</div>
@@ -22,7 +30,7 @@
             <div style="color: black">Niveau:</div>
             <input type="text" name="niveau" value="">
         </div>
-        <div style="margin-top: 20px">
+        <div style="margin-top: 20px; margin-left: 50px">
             <input type="submit" class="btn btn-primary butn" value="Verzenden">
         </div>
     </form>

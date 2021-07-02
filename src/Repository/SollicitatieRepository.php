@@ -71,6 +71,17 @@ class SollicitatieRepository extends ServiceEntityRepository
         return($sol);
     }
 
+    public function veranderMotivatie($soll_id, $new_mot){
+
+        $sol = $this->find($soll_id);
+        $sol->setMotivatie($new_mot);
+        
+        $this->_em->persist($sol);
+        $this->_em->flush();
+
+        return($sol);
+    }
+
     // /**
     //  * @return Sollicitatie[] Returns an array of Sollicitatie objects
     //  */

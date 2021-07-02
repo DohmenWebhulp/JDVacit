@@ -210,3 +210,36 @@
 .heart {
     cursor: pointer;
 }
+
+.tablehead {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.omsch {
+    color: grey;
+    font-style: italic;
+}
+
+.box {
+    width: 100%;
+    height: 100px; 
+    position: relative;
+    background-color: #333333; 
+    color: white;
+}
+
+.box-content {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
+
+.button a {
+    display: inline;
+    padding: 20px;
+}
+
+.rc {
+    font-family: 'Roboto Condensed', sans-serif;
+}

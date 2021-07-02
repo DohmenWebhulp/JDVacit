@@ -1,49 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfielWGController!{% endblock %}
+{% block title %}Mijn Sollicitaties{% endblock %}
 
 {% block body %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-
-<div>
-    {% for sollicitatie in data %}
-        <script>
-
-            $(document).ready(function(){
-                $('#{{sollicitatie.ID}}sol').click(function(){
-                    $.ajax({
-                        url: "{{path('verwsol', {'soll_id' : sollicitatie.ID})}}",
-                        method: "POST",
-                        success: function(response){
-                            
-                        }
-                    })
-                    $('#{{sollicitatie.ID}}div').remove();
-                })
-            })
-        </script>
-        <div id="{{sollicitatie.ID}}div">
-            <span>
-                {{sollicitatie.id}}
-            </span>
-            <span>
-                {{sollicitatie.vacature.titel}}
-            </span>
-            <span>
-                {{sollicitatie.vacature.userWG.gebruikersnaam}}
-            </span>
-            <span>
-                {% if sollicitatie.uitnodiging == 1 %}
-                    Vinkje
-                {% endif %}
-            </span>
-            <span>
-                <input type="button" id="{{sollicitatie.ID}}sol" value="Sollicitatie Verwijderen">
-            </span>
+<div class="box">
+    <div class="box-content">
+        <div class="button">
+            <a href="{{path('profielWN')}}">Mijn Profiel</a>
+            <a href="{{path('homepage')}}">Homepage</a>
         </div>
-    {% endfor %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        Plaatje
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-2 tablehead">
+                Datum
+            </div>
+            <div class="col-md-2 tablehead">
+                Titel
+            </div>
+            <div class="col-md-2 tablehead">
+                Bedrijf
+            </div>
+            <div class="col-md-3 tablehead">
+                Status Uitnodiging
+            </div>
+            <div class="col-md-3 tablehead">
+                Verwijderen?
+            </div>
+        </div>
+        <hr>
+        {% for sollicitatie in data %}
+            <script>
+
+                $(document).ready(function(){
+                    $('#{{sollicitatie.ID}}sol').click(function(){
+                        $.ajax({
+                            url: "{{path('verwsol', {'soll_id' : sollicitatie.ID})}}",
+                            method: "POST",
+                            success: function(response){
+                                
+                            }
+                        })
+                        $('#{{sollicitatie.ID}}div').remove();
+                    })
+                })
+            </script>
+            <div class="row" id="{{sollicitatie.ID}}div">
+                <div class="col-md-2">
+                    {{sollicitatie.datum | date('Y/m/d')}}
+                </div>
+                <div class="col-md-2">
+                    {{sollicitatie.vacature.titel}}
+                </div>
+                <div class="col-md-2">
+                    {{sollicitatie.vacature.userWG.gebruikersnaam}}
+                </div>
+                <div class="col-md-3">
+                    {% if sollicitatie.uitnodiging == 1 %}
+                        Vinkje
+                    {% endif %}
+                </div>
+                <div class="col-md-3">
+                    <input type="button" id="{{sollicitatie.ID}}sol" value="Sollicitatie Verwijderen">
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

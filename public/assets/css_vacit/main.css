@@ -31,7 +31,8 @@
 
 /** HEADING **/
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--heading) !important;
+    font-family: 'Bebas Neue', cursive;
+
 }
 
 h1 {
@@ -46,7 +47,13 @@ h3, h4, h5 {
     font-size: 32px;
 }
 
+div {
+    font-family: 'Arial';
+}
 
+input {
+    font-family: 'Roboto Condensed', sans-serif;
+}
 /** HTML / BODY **/
 html, body {
     font-family: "Bebase Neue", Arial, SansSerif;

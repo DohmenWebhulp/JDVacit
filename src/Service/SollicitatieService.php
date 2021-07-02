@@ -54,4 +54,11 @@ class SollicitatieService{
 
         return($data);
     }
+
+    public function updateMotivatie($soll_id, $new_mot){
+        
+        $data = $this->sollRep->veranderMotivatie($soll_id, $new_mot);
+
+        return($data);
+    }
 }

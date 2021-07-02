@@ -50,7 +50,7 @@ class ProfielWGController extends AbstractController
     public function importeerSpreadsheet(){
 
         //Commando
-        $this->us->toevoegenUser();
+        $this->us->toevoegenUser($database);
     }
 
     /**
@@ -65,6 +65,9 @@ class ProfielWGController extends AbstractController
      * @Route("/vactoe", name="vactoe")
      */
     public function uploadVacature(){//na uploaden redirecten naar Homepage
+
+        //user is degene die vacature uploadt.
+        //vacature wordt op dit tijdstip geuploadt.
 
         $user = $this->getUser();
         $uid = $user->getId();
@@ -99,6 +102,8 @@ class ProfielWGController extends AbstractController
      */
     public function ophalenVacatures(){//Mijn_Vacatures
 
+        //Vacatures per bedrijf (FK collection)
+
         $user = $this->getUser();
         $data = $user->getVacatures();
 
@@ -108,6 +113,8 @@ class ProfielWGController extends AbstractController
      * @Route("/profielWG/vac/{vac_id}", name="mijn_vacsol")
      */
     public function ophalenSollicitatiesPerVacature($vac_id){
+
+        //Alle sollicitaties op een bepaalde vacature (FK collection)
 
         $vacature = $this->vs->ophalenVacature($vac_id);
         $solls = $vacature->getSollicitaties();
