@@ -3,14 +3,10 @@
 {% block title %}Homepage{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
 <div class="box">
     <div class="box-content">
-        <div class="button">
+        <div class="buttons">
         {% if user.roles[0] == "ROLE_CANDIDATE" %}
             <a href="{{path('profielWN')}}">Mijn Profiel</a>
         {% else %}
@@ -21,23 +17,55 @@
         </div>
     </div>
 </div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            Plaatje
+<div class="grid-x" style="background-color: #F15A24">
+    <div class="cell large-4" style="position: relative">
+        <div class="slide" style="margin-left: 50px; margin-top: 50px">
+            <div class="hexa" id="vegasShow" style="background-size: 60% 60%">
+                <script>
+                    let vacatures_info = [];
+                    {% for vacature in data | sort((a, b) => b.datum <=> a.datum) %}
+                        {% set platformlogo = vacature.platform.afbeelding | default('Windows') %}
+                            vacatures_info.push({src: "{{ vacature.platform.afbeelding|format(platformlogo) }}",
+                            titel: "{{vacature.niveau}} {{vacature.titel}}", 
+                            plaats: "{{vacature.userWG.gebruikersnaam}}, {{vacature.userWG.woonplaats}}"});
+                    {% endfor %}
+                    $(document).ready( function(){
+                        console.log(vacatures_info);
+                        $("#vegasShow").vegas({
+                            slides: vacatures_info,
+                            slidesToKeep: 0,
+                            timer: false,
+                            walk: function(index, slideSettings){
+                                $('#vacature_titel').html(slideSettings.titel);
+                                $('#vacature_plaats').html(slideSettings.plaats);
+                            }
+                        });
+                    })
+                </script>
+            </div>
         </div>
-        <div class="col-md-8">
-            {% for vacature in data %}
-                <div style="margin-top: 20px">
+        <h2 id="vacature_titel" class="label"></h2>
+        <h4 id="vacature_plaats" class="small_label"></h4>
+    </div>
+    <div class="cell large-8">
+        {% for vacature in data %}
+            <div class="grid-x">
+                <div class="hexa" style="margin-top: 20px">
+                    <div class="cell small-3">
+                        <img src="{{vacature.platform.afbeelding}}" style="width: 110px; height: 110px">
+                    </div>
+                </div>
+                <div class="cell small-7" style="margin-top: 20px">
                     <h6>{{vacature.datum| date('Y/m/d')}}</h6>
-                    <h2>{{vacature.titel}} voor {{vacature.userWG.gebruikersnaam}}</h2>
-                    <div>{{vacature.omschrijving}}<br>
+                    <h2 style="color: white">{{vacature.titel}} voor {{vacature.userWG.gebruikersnaam}}</h2>
+                    <div style="font-style: italic">{{vacature.omschrijving}}<br>
                     <a href="{{ path('detailpage' , { 'id': vacature.id}) }}">Link to Detailpage</a></div>
                 </div>
-            {% endfor %}
-        </div>
+                <div class="cell small-2">
+                    <a href="{{ path('detailpage' , { 'id': vacature.id}) }}"><i class="fas fa-arrow-right fa-4x" style="color: white"></i></a>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 </div>
-
 {% endblock %}

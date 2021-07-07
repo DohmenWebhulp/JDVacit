@@ -21,38 +21,26 @@
         Plaatje
     </div>
     <div class="col-md-9">
-        <div class="row">
-            <div class="col-md-3 tablehead">
-                Datum vacature
-            </div>
-            <div class="col-md-3 tablehead">
-                Titel
-            </div>
-            <div class="col-md-3 tablehead">
-                Aantal sollicitaties
-            </div>
-            <div class="col-md-3 tablehead">
-                Link naar sollicitaties
-            </div>
-        </div>
-        <hr>
-        {% for vacature in data %}
-            <div class="row">
-                <div class="col-md-3">
-                    {{vacature.datum | date('Y/m/d')}}
-                </div>
-                <div class="col-md-3">
-                    {{vacature.titel}}
-                </div>
-                <div class="col-md-3">
-                    {{vacature.sollicitaties | length}}
-                </div>
-                <div class="col-md-3">
-                    <a href="{{ path('mijn_vacsol' , { 'vac_id': vacature.id}) }}">Bekijk alle sollicitaties</a>
-                </div>
-            </div>
-            <hr>
-        {% endfor %}
+        <table class="display">
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Titel</th>
+                    <th>Aantal Sollicitaties</th>
+                    <th>Link naar Sollicitaties</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vacature in data %} 
+                <tr>
+                    <td>{{vacature.datum | date('Y/m/d')}}</td>
+                    <td>{{vacature.titel}}</td>
+                    <td>{{vacature.sollicitaties | length}}</td>
+                    <td><a href="{{ path('mijn_vacsol' , { 'vac_id': vacature.id}) }}">Bekijk alle sollicitaties</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

@@ -23,54 +23,42 @@
         Plaatje
     </div>
     <div class="col-md-9">
-        <div class="row">
-            <div class="col-md-3 tablehead">
-                Datum sollicitatie
-            </div>
-            <div class="col-md-3 tablehead">
-                Titel
-            </div>
-            <div class="col-md-3 tablehead">
-                Sollicitant
-            </div>
-            <div class="col-md-3 tablehead">
-                Uitnodigen?
-            </div>
-        </div>
-        <hr>
-        {% for sollicitatie in data %}
-            <script>
+        <table class="display">
+            <thead>
+                <tr>
+                    <th>Datum sollicitatie</th>
+                    <th>Titel</th>
+                    <th>Sollicitant</th>
+                    <th>Uitnodigen?</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sollicitatie in data %} 
+                    <script>
 
-                $(document).ready(function(){
-                    $('#{{sollicitatie.ID}}tndgn').click(function(){
-                        $.ajax({
-                            url: "{{path('vacsol')}}",
-                            method: "POST",
-                            data: {sol_id: {{sollicitatie.ID}}},
-                            success: function(response){
-                                $('{{sollicitatie.ID}}tndgn').attr("value" , "Uitgenodigd");
-                                $('{{sollicitatie.ID}}tndgn').prop('disabled', true);
-                            }
+                        $(document).ready(function(){
+                            $('#{{sollicitatie.ID}}tndgn').click(function(){
+                                $.ajax({
+                                    url: "{{path('vacsol')}}",
+                                    method: "POST",
+                                    data: {sol_id: {{sollicitatie.ID}}},
+                                    success: function(response){
+                                        $('{{sollicitatie.ID}}tndgn').attr("value" , "Uitgenodigd");
+                                        $('{{sollicitatie.ID}}tndgn').prop('disabled', true);
+                                    }
+                                })
+                            })
                         })
-                    })
-                })
-            </script>
-            <div class="row">
-                <div class="col-md-3">
-                    {{sollicitatie.datum | date('Y/m/d')}}
-                </div>
-                <div class="col-md-3">
-                    {{sollicitatie.vacature.titel}}
-                </div>
-                <div class="col-md-3">
-                    <a href="{{path('profielWNA', {'user_id': sollicitatie.userWN.ID})}}">{{sollicitatie.userWN.gebruikersnaam}}</a>
-                </div>
-                <div class="col-md-3">
-                    <input type="button" id="{{sollicitatie.ID}}tndgn" value="Uitnodigen">
-                </div>
-            </div>
-            <hr>
-        {% endfor %}
+                    </script>
+                    <tr>
+                        <td>{{sollicitatie.datum | date('Y/m/d')}}</td>
+                        <td>{{sollicitatie.vacature.titel}}</td>
+                        <td><a href="{{path('profielWNA', {'user_id': sollicitatie.userWN.ID})}}">{{sollicitatie.userWN.gebruikersnaam}}</a></td>
+                        <td><input type="button" id="{{sollicitatie.ID}}tndgn" value="Uitnodigen"></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

@@ -9,7 +9,7 @@
 </style>
 <div class="box">
     <div class="box-content">
-        <div class="button">
+        <div class="buttons">
             {% if user.roles[0] == "ROLE_CANDIDATE" %}
             <a href="{{path('profielWN')}}">Mijn Profiel</a>
             {% else %}
@@ -19,56 +19,47 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            Plaatje
+<div class="addon">
+</div>
+<div class="grid-x">
+    <div class="cell large-2">
+        <img src="{{data.platform.afbeelding}}" style="width: 110px; height: 110px">
+    </div>
+    <div class="cell large-9">
+        <h6>{{data.datum | date('Y/m/d')}}</h6>
+        <h1>{{data.titel}}</h1>
+        <div class="flotl">
+            <h4>Niveau: {{data.niveau}}</h4>
         </div>
-        <div class="col-md-6">
-            <h6>{{data.datum | date('Y/m/d')}}</h6>
-            <h1>{{data.titel}}</h1>
-            <div class="flotl">
-                <h4>Niveau: {{data.niveau}}</h4>
-            </div>
-            <div class="flotr">
-                <h4>Plaats: {{data.userWG.woonplaats}}</h4>
-            </div>
-            <div style="clear: both"></div>
-            <div class="omsch">{{data.omschrijving}}</div>
-            <div style="margin-top: 30px; margin-bottom: 30px">
-                {% if user.roles[0] == "ROLE_CANDIDATE" %}
-                    <input type="submit" id="sllctrn" value="Solliciteer Nu!">
-                {% endif %}
-            </div>
-            <h2> Meer vacatures van {{data.userWG.gebruikersnaam}}</h2>
-            <div class="row">
-                <div class="col-md-2 tablehead">
-                    Datum
-                </div>
-                <div class="col-md-5 tablehead">
-                    Vacature
-                </div>
-                <div class="col-md-5 tablehead">
-                    Niveau
-                </div>
-            </div>
-            <hr>
-            <div>
-                {% for vacature in data2 %}
-                    <div class="row">
-                        <span class="col-md-2">
-                            {{vacature.datum | date('Y/m/d')}}
-                        </span>
-                        <span class="col-md-5">
-                            {{vacature.titel}}
-                        </span>
-                        <span class="col-md-5">
-                            {{vacature.niveau}}
-                        </span>
-                    </div><hr>
+        <div class="flotr">
+            <h4><i class="fas fa-map-marker-alt" style="color: #F15A24"></i> : {{data.userWG.woonplaats}}</h4>
+        </div>
+        <div style="clear: both"></div>
+        <div class="omsch">{{data.omschrijving}}</div>
+        <div style="margin-top: 30px; margin-bottom: 30px">
+            {% if user.roles[0] == "ROLE_CANDIDATE" %}
+                <input type="submit" id="sllctrn" value="Solliciteer Nu!">
+            {% endif %}
+        </div>
+        <h2> Meer Vacatures van {{data.userWG.gebruikersnaam}}</h2>
+        <table class="display">
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Titel</th>
+                    <th>Niveau</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vacature in data2 %} 
+                <tr>
+                    <td>{{vacature.datum | date('Y/m/d')}}</td>
+                    <td>{{vacature.titel}}</td>
+                    <td>{{vacature.niveau}}</td>
+                </tr>
                 {% endfor %}
-            </div>
-        </div>
+            </tbody>
+        </table>
     </div>
 </div>
 <script>

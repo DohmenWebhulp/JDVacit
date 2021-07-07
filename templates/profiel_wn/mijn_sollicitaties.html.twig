@@ -3,13 +3,9 @@
 {% block title %}Mijn Sollicitaties{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 <div class="box">
     <div class="box-content">
-        <div class="button">
+        <div class="buttons">
             <a href="{{path('profielWN')}}">Mijn Profiel</a>
             <a href="{{path('homepage')}}">Homepage</a>
         </div>
@@ -20,61 +16,46 @@
         Plaatje
     </div>
     <div class="col-md-9">
-        <div class="row">
-            <div class="col-md-2 tablehead">
-                Datum
-            </div>
-            <div class="col-md-2 tablehead">
-                Titel
-            </div>
-            <div class="col-md-2 tablehead">
-                Bedrijf
-            </div>
-            <div class="col-md-3 tablehead">
-                Status Uitnodiging
-            </div>
-            <div class="col-md-3 tablehead">
-                Verwijderen?
-            </div>
-        </div>
-        <hr>
-        {% for sollicitatie in data %}
-            <script>
+        <h1 style="color: #F15A24; margin-top: 30px; margin-bottom: 30px">Mijn Sollicitaties</h1>
+        <table class="display">
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Vacature</th>
+                    <th>Bedrijf</th>
+                    <th>Status Uitnodiging</th>
+                    <th>Verwijderen?</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sollicitatie in data %} 
+                <script>
 
-                $(document).ready(function(){
-                    $('#{{sollicitatie.ID}}sol').click(function(){
-                        $.ajax({
-                            url: "{{path('verwsol', {'soll_id' : sollicitatie.ID})}}",
-                            method: "POST",
-                            success: function(response){
-                                
-                            }
+                    $(document).ready(function(){
+                        $('#{{sollicitatie.ID}}sol').click(function(){
+                            $.ajax({
+                                url: "{{path('verwsol', {'soll_id' : sollicitatie.ID})}}",
+                                method: "POST",
+                                success: function(response){
+                                    
+                                }
+                            })
+                            $('#{{sollicitatie.ID}}div').remove();
                         })
-                        $('#{{sollicitatie.ID}}div').remove();
                     })
-                })
-            </script>
-            <div class="row" id="{{sollicitatie.ID}}div">
-                <div class="col-md-2">
-                    {{sollicitatie.datum | date('Y/m/d')}}
-                </div>
-                <div class="col-md-2">
-                    {{sollicitatie.vacature.titel}}
-                </div>
-                <div class="col-md-2">
-                    {{sollicitatie.vacature.userWG.gebruikersnaam}}
-                </div>
-                <div class="col-md-3">
-                    {% if sollicitatie.uitnodiging == 1 %}
+                </script>
+                <tr>
+                    <td>{{sollicitatie.datum | date('Y/m/d')}}</td>
+                    <td>{{sollicitatie.vacature.titel}}</td>
+                    <td>{{sollicitatie.vacature.userWG.gebruikersnaam}}</td>
+                    <td>{% if sollicitatie.uitnodiging == 1 %}
                         Vinkje
-                    {% endif %}
-                </div>
-                <div class="col-md-3">
-                    <input type="button" id="{{sollicitatie.ID}}sol" value="Sollicitatie Verwijderen">
-                </div>
-            </div>
-            <hr>
-        {% endfor %}
+                    {% endif %}</td>
+                    <td><input type="button" id="{{sollicitatie.ID}}sol" value="Sollicitatie Verwijderen"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

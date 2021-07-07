@@ -49,6 +49,11 @@ class Vacature
      */
     private $userWG;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Platform::class, inversedBy="vacatures")
+     */
+    private $platform;
+
     public function __construct()
     {
         $this->sollicitaties = new ArrayCollection();
@@ -145,6 +150,18 @@ class Vacature
     public function setUserWG(?User $userWG): self
     {
         $this->userWG = $userWG;
+
+        return $this;
+    }
+
+    public function getPlatform(): ?Platform
+    {
+        return $this->platform;
+    }
+
+    public function setPlatform(?Platform $platform): self
+    {
+        $this->platform = $platform;
 
         return $this;
     }
