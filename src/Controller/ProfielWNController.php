@@ -55,7 +55,7 @@ class ProfielWNController extends AbstractController
     }
 
     /**
-     * @Route("/bijwerken", name="bijwerken")
+     * @Route("/bijwerkenWN", name="bijwerkenWN")
      */
     public function bijwerkenProfiel(){//Mijn_ProfielWN
 

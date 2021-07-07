@@ -41,10 +41,19 @@ class ProfielWGController extends AbstractController
 
         return($this->render('profiel_wg/mijn_profielWG.html.twig', ['user' => $user]));
     }
-
+    /**
+     * @Route("/bijwerkenWG", name="bijwerkenWG")
+     */
     public function bijwerkenProfiel(){//Mijn_ProfielWG
 
-        $this->us->toevoegenUser();
+        $user = $this->userToDatabase($_POST);
+        $currentUser = $this->getUser();
+        $id = ["id" => $currentUser->getId()];
+        $userWG = array_merge($id, $user);
+
+        $user2 = $this->us->toevoegenUser($userWG);
+
+        return($this->redirectToRoute('profielWG'));
     }
 
     public function importeerSpreadsheet(){
@@ -122,6 +131,21 @@ class ProfielWGController extends AbstractController
         return($this->render('profiel_wg/mijn_vacatures_sollicitaties.html.twig', ['data' => $solls]));
     }
 
-    //Ophalen vacatures door werkgever gevolgd door ophalen sollicitaties horende bij die vacature?->FK relatie
+    private function userToDatabase($array){
 
+        $user = [
+            'email' => $array['email'],
+            'roles' => ["ROLE_COMPANY"],
+            'password' => $array['password'],
+            'record_type' => 'WG',
+            'gebruikersnaam' => $array['gebruikersnaam'],
+            'adres' => $array['adres'],
+            'geboortedatum' => new \DateTime($array['geboortedatum']),
+            'telefoonnummer' => $array['telefoonnummer'],
+            'postcode' => $array['postcode'],
+            'woonplaats' => $array['woonplaats']
+        ];
+
+        return($user);
+    }
 }

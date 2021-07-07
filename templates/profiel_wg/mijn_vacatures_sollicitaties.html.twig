@@ -3,26 +3,24 @@
 {% block title %}Mijn Vacatures_Sollicitaties{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
 <div class="box">
+    <h1 class="logos">VACIT</h1>
     <div class="box-content">
-        <div class="button">
+        <div class="buttons">
             <a href="{{path('mijn_vac')}}">Mijn Vacatures</a>
             <a href="{{path('profielWG')}}">Mijn Profiel</a>
             <a href="{{path('homepage')}}">Homepage</a>
         </div>
     </div>
 </div>
-
-<div class="row">
-    <div class="col-md-3">
+<div class="addon"></div>
+<div class="grid-x">
+    <div class="cell large-2">
         Plaatje
     </div>
-    <div class="col-md-9">
+    <div class="cell large-9">
+        <h1 style="color: #F15A24; margin-top: 30px; margin-bottom: 30px">Sollicitaties op mijn Vacatures</h1>
         <table class="display">
             <thead>
                 <tr>
@@ -43,10 +41,12 @@
                                     method: "POST",
                                     data: {sol_id: {{sollicitatie.ID}}},
                                     success: function(response){
-                                        $('{{sollicitatie.ID}}tndgn').attr("value" , "Uitgenodigd");
-                                        $('{{sollicitatie.ID}}tndgn').prop('disabled', true);
+                                        $('#{{sollicitatie.ID}}tndgn').attr("value" , "Uitgenodigd");
+                                        $('#{{sollicitatie.ID}}tndgn').prop('disabled', true);
                                     }
                                 })
+                                //$('#{{sollicitatie.ID}}tndgn').attr("value" , "Uitgenodigd");
+                                //$('#{{sollicitatie.ID}}tndgn').prop('disabled', true);
                             })
                         })
                     </script>

@@ -4,31 +4,33 @@
 
 {% block body %}
 <div class="box">
+    <h1 class="logos">VACIT</h1>
     <div class="box-content">
-        <div class="button">
+        <div class="buttons">
             <a href="{{path('homepage')}}">Homepage</a>
         </div>
     </div>
 </div>
+<div class="addon"></div>
 <form action="{{path('register')}}" style="margin-left: 100px" method="POST">
 
-    <h1 class="h3 mb-3 font-weight-normal">Registreer uw informatie</h1>
+    <h1 style="color: #F15A24; margin-top: 30px; margin-bottom: 30px">Registreer uw informatie</h1>
     <label for="inputEmail">Email</label>
-    <input type="text" value="" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <input type="text" value="" name="email" id="inputEmail" class="form-control rc form" autocomplete="email" required autofocus>
     <label for="inputPassword">Password</label>
-    <input type="text" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <input type="text" name="password" id="inputPassword" class="form-control rc form" autocomplete="current-password" required>
     <label for="inputGebruikersnaam">Gebruikersnaam</label>
-    <input type="text" name="gebruikersnaam" id="inputGebruikersnaam" class="form-control">
+    <input type="text" name="gebruikersnaam" id="inputGebruikersnaam" class="form-control rc form">
     <label for="inputAdres">Adres</label>
-    <input type="text" name="adres" id="inputAdres" class="form-control">
+    <input type="text" name="adres" id="inputAdres" class="form-control rc form">
     <label for="inputGeboortedatum">Geboortedatum</label>
-    <input type="text" name="geboortedatum" id="inputGeboortedatum" class="form-control">
+    <input type="text" name="geboortedatum" id="inputGeboortedatum" class="form-control rc form">
     <label for="inputTelefoonnummer">Telefoonnummer</label>
-    <input type="text" name="telefoonnummer" id="inputTelefoonnummer" class="form-control">
+    <input type="text" name="telefoonnummer" id="inputTelefoonnummer" class="form-control rc form">
     <label for="inputPostcode">Postcode</label>
-    <input type="text" name="postcode" id="inputPostcode" class="form-control">
+    <input type="text" name="postcode" id="inputPostcode" class="form-control rc form">
     <label for="inputWoonplaats">Woonplaats</label>
-    <input type="text" name="woonplaats" id="inputWoonplaats" class="form-control">
+    <input type="text" name="woonplaats" id="inputWoonplaats" class="form-control rc form">
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}">

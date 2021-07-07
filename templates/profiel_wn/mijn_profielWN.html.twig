@@ -3,12 +3,9 @@
 {% block title %}Profiel Werknemer{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
 <div class="box">
+    <h1 class="logos">VACIT</h1>
     <div class="box-content">
         <div class="buttons">
             <a href="{{path('mijn_sols', { 'user_id' : user.id})}}" class="box-content1">Mijn Sollicitaties</a>
@@ -16,31 +13,43 @@
         </div>
     </div>
 </div>
-
-<div class="row" style="color: #F15A24">
-    <div class="col-md-3" style="margin-left: 50px">
+<div class="addon"></div>
+<div class="grid-x" style="color: #F15A24">
+    <div class="cell large-2" style="margin-left: 50px">
         Foto
     </div>
-    <div class="col-md-8">
+    <div class="cell large-9">
         <h1 style="color: #F15A24; margin-bottom: 30px">Mijn Profiel</h1>
-        <form action="{{path('bijwerken')}}" method="POST">
-            <label for="inputEmail">Email</label>
-            <input type="text" value="{{user.email}}" name="email" id="inputEmail" class="form-control rc" autocomplete="email" required autofocus>
-            <label for="inputPassword">Password</label>
-            <input type="text" value="{{user.password}}" name="password" id="inputPassword" class="form-control rc" autocomplete="current-password" required>
-            <label for="inputGebruikersnaam">Gebruikersnaam</label>
-            <input type="text" value="{{user.gebruikersnaam}}" name="gebruikersnaam" id="inputGebruikersnaam" class="form-control rc">
-            <label for="inputAdres">Adres</label>
-            <input type="text" value="{{user.adres}}" name="adres" id="inputAdres" class="form-control rc">
-            <label for="inputGeboortedatum">Geboortedatum</label>
-            <input type="text" value="{{user.geboortedatum | date('Y/m/d')}}" name="geboortedatum" id="inputGeboortedatum" class="form-control rc">
-            <label for="inputTelefoonnummer">Telefoonnummer</label>
-            <input type="text" value="{{user.telefoonnummer}}" name="telefoonnummer" id="inputTelefoonnummer" class="form-control rc">
-            <label for="inputPostcode">Postcode</label>
-            <input type="text" value="{{user.postcode}}" name="postcode" id="inputPostcode" class="form-control rc">
-            <label for="inputWoonplaats">Woonplaats</label>
-            <input type="text" value="{{user.woonplaats}}" name="woonplaats" id="inputWoonplaats" class="form-control rc">
-        
+        <form action="{{path('bijwerkenWN')}}" method="POST">
+            <div class="form">
+                <label for="inputGebruikersnaam">Gebruikersnaam</label>
+                <input type="text" value="{{user.gebruikersnaam}}" name="gebruikersnaam" id="inputGebruikersnaam" class="form-control rc form">
+                <label for="inputEmail">Email</label>
+                <input type="text" value="{{user.email}}" name="email" id="inputEmail" class="form-control rc form" autocomplete="email" required autofocus>
+                <div class="grid-x">
+                    <div class="cell large-4 small-12" style="margin-right: 30px">
+                        <label for="inputGeboortedatum">Geboortedatum</label>
+                        <input type="text" value="{{user.geboortedatum | date('Y/m/d')}}" name="geboortedatum" id="inputGeboortedatum" class="form-control rc form">
+                    </div>
+                    <div class="cell large-7 small-12">
+                        <label for="inputTelefoonnummer">Telefoonnummer</label>
+                        <input type="text" value="{{user.telefoonnummer}}" name="telefoonnummer" id="inputTelefoonnummer" class="form-control rc form">
+                    </div>
+                </div>
+                <input type="hidden" value="{{user.password}}" name="password" id="inputPassword" class="form-control rc form" autocomplete="current-password" required>
+                <label for="inputAdres">Adres</label>
+                <input type="text" value="{{user.adres}}" name="adres" id="inputAdres" class="form-control rc form">
+                <div class="grid-x">
+                    <div class="cell small-4" style="margin-right: 30px">
+                        <label for="inputPostcode">Postcode</label>
+                        <input type="text" value="{{user.postcode}}" name="postcode" id="inputPostcode" class="form-control rc form">
+                    </div>
+                    <div class="cell small-7">
+                        <label for="inputWoonplaats">Woonplaats</label>
+                        <input type="text" value="{{user.woonplaats}}" name="woonplaats" id="inputWoonplaats" class="form-control rc form">
+                    </div>
+                </div>
+            </div>
             <script>
 
                 $(document).ready(function(){
@@ -59,9 +68,12 @@
             <h1 style="color: #F15A24; margin-top: 30px; margin-bottom: 20px">Motivatie</h1>
             <textarea id="wysiwyg" style="width: 500px" name="motivatie" class="rc"></textarea>
 
-            <button class="btn btn-lg btn-primary" style="margin-top: 20px; margin-bottom: 20px" type="submit">
-                Opslaan
+            <button class="btn btn-lg btn-primary flotr" 
+                    style="margin-top: 20px; margin-bottom: 20px; background-color: white; border: 0" 
+                    type="submit">
+                <h2 style="color: #F15A24"><i class="fas fa-arrow-right"></i> Opslaan</h2>
             </button>
+            <div style="clear: both"></div>
         </form>
         <h1 style="color: #F15A24">Upload your CV</h1>
             <script>
@@ -100,10 +112,12 @@
                 });
             </script>     
             <!--<div id="upload" style="width: 200px; height: 200px; background-color: #F00; cursor: pointer">-->
-        <form method="POST">
-            <label for="inputcv">CV</label>
-            <input type="text" name="cv" id="upload" class="form-control rc">
+        <form action="{{path('upload_file')}}" method="POST">
+            <label for="upload" class="button">Upload your CV</label>
+            <input type="file" id="upload" class="show-for-sr">
         </form>
+        <i class="fas fa-file-pdf fa-2x" style="color: #F15A24"></i>
+        <i class="fas fa-file-image fa-2x" style="color: #F15A24"></i>
     </div>
 </div>
 {% endblock %}
