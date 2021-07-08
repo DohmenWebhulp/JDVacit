@@ -59,3 +59,17 @@ html, body {
     font-family: "Bebase Neue", Arial, SansSerif;
     font-size: 16px;
 }
+
+a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: white;
+}
+
+a:visited {
+    color: white;
+}

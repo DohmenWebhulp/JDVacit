@@ -7,8 +7,8 @@
     <h1 class="logos">VACIT</h1>
     <div class="box-content">
         <div class="buttons">
-            <a href="{{path('profielWN')}}">Mijn Profiel</a>
-            <a href="{{path('homepage')}}">Homepage</a>
+            <a href="{{path('profielWN')}}">MIJN PROFIEL</a>
+            <a href="{{path('homepage')}}">HOMEPAGE</a>
         </div>
     </div>
 </div>
@@ -51,7 +51,7 @@
                     <td>{{sollicitatie.vacature.titel}}</td>
                     <td>{{sollicitatie.vacature.userWG.gebruikersnaam}}</td>
                     <td>{% if sollicitatie.uitnodiging == 1 %}
-                        Vinkje
+                        <i class="fas fa-check fa-2x" style="color: #F15A24"></i>
                     {% endif %}</td>
                     <td><input type="button" id="{{sollicitatie.ID}}sol" value="Sollicitatie Verwijderen"></td>
                 </tr>

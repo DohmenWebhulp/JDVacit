@@ -285,11 +285,11 @@
     position: absolute;
     right: 24px;
     top: 240px;
-    width: 70%;
-    height: 6%;
+    width: 300px;
+    height: 40px;
     background-color: #333333;
     transform: rotate(-15deg);
-    font-size: 2.3vw;
+    font-size: 2em;
     text-align: center;
 }
 
@@ -297,8 +297,8 @@
     position: absolute;
     right: 10px;
     top: 290px;
-    width: 40%;
-    height: 4%;
+    width: 200px;
+    height: 35px;
     background-color: #333333;
     transform: rotate(-15deg);
     font-size: 1.5em;
