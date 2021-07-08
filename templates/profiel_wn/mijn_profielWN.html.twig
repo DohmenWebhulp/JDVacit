@@ -16,7 +16,9 @@
 <div class="addon"></div>
 <div class="grid-x" style="color: #F15A24">
     <div class="cell large-2" style="margin-left: 50px">
-        Foto
+        <div class="loader"></div>
+        <!--<div class="uploadstyle" id="upload">Foto</div>-->
+        <img src="/screenshots/windows.png" id="upload">
     </div>
     <div class="cell large-9">
         <h1 style="color: #F15A24; margin-bottom: 30px">Mijn Profiel</h1>
@@ -78,10 +80,13 @@
         <h1 style="color: #F15A24">Upload your CV</h1>
             <script>
                 $(document).ready(function() {
+                    $('#png').hide();
+                    $('#pdf').hide();
+                    $('.loader').hide();
                     let uploader = new ss.SimpleUpload({
                         button: "upload",
                         url: "{{ path('upload_file') }}",
-                        name: 'cv', // upload parameter name die gebruikt wordt in de controller
+                        name: 'file', // upload parameter name die gebruikt wordt in de controller
                         responseType: 'json',
                         allowedExtensions: ['png', 'jpg', 'jpeg', 'pdf'],
                         hoverClass: 'hover-class-upload',
@@ -96,26 +101,44 @@
                             alert('Invalid file type. Please use a PNG, JPG or JPEG or PDF file');
                         },
                         onSubmit: function( filename, extension, uploadBtn, fileSize ) {
-                            /// Bijvoorbeeld een overlay of een spinner starten...
+                            $('#upload').hide(); $('#pdf').hide(); $('#png').hide();
+                            $('.loader').show();
                             return(true);
                         },
                         onComplete: function (filename, response) {
                             if(response.success === false) {
                                 alert(response.errors);
                             } else {
+                                let str = response.file_id;
+                                if(str.slice(str.length - 3) == "pdf"){
+                                    $('#pdf').show();
+                                    $('#png').hide();
+                                }else{
+                                    console.log
+                                    $('#upload').attr("src", "/" . str);
+                                    //$('#png').show();
+                                    $('#pdf').hide();
+                                }
                                 console.log(response.file_id);
-                                /// Doe iets met response.file_id (path naar de geuploade file)
-                                
+                                let sub = str.substring(21, str.length);
+                                //$('#upload').text(sub);
+                                $('#upload').show();
+                                $('.loader').hide();
                             }
                         }
                     });
                 });
             </script>     
-            <!--<div id="upload" style="width: 200px; height: 200px; background-color: #F00; cursor: pointer">-->
-            <div id="upload">Upload</div>
-        
-        <i class="fas fa-file-pdf fa-2x" style="color: #F15A24"></i>
-        <i class="fas fa-file-image fa-2x" style="color: #F15A24"></i>
+            <div class="grid-x">
+                <div class="cell large-2">
+                    <i class="fas fa-file-pdf fa-2x" id="pdf" style="color: #F15A24"></i>
+                    <i class="fas fa-file-image fa-2x" id="png" style="color: #F15A24"></i>
+                    <div class="loader"></div>
+                </div>
+                <div class="cell large-8">
+                    <div class="uploadstyle" id="upload2">Upload</div>
+                </div>
+            </div>
     </div>
 </div>
 {% endblock %}

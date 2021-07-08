@@ -28,7 +28,7 @@ class UploadController extends AbstractController
         $path = "upload/";
 
         $file_id = uniqid();
-        $uploader = new FileUpload($_FILES['cv']);
+        $uploader = new FileUpload('file');
         $uploader->newFileName =  $file_id . "-" . strtolower(str_replace(" ", "-", $uploader->getFileName()));
         $result = $uploader->handleUpload("$path");
 
