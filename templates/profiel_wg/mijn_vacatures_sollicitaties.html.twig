@@ -53,7 +53,7 @@
                     <tr>
                         <td>{{sollicitatie.datum | date('Y/m/d')}}</td>
                         <td>{{sollicitatie.vacature.titel}}</td>
-                        <td><a href="{{path('profielWNA', {'user_id': sollicitatie.userWN.ID})}}">{{sollicitatie.userWN.gebruikersnaam}}</a></td>
+                        <td><a href="{{path('profielWNA', {'user_id': sollicitatie.userWN.ID})}}" style="color: black; font-weight: unset">{{sollicitatie.userWN.gebruikersnaam}}</a></td>
                         <td><input type="button" id="{{sollicitatie.ID}}tndgn" value="Uitnodigen"></td>
                     </tr>
                 {% endfor %}

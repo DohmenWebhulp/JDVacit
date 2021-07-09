@@ -14,8 +14,57 @@
 </div>
 <div class="addon"></div>
 <div class="grid-x">
-    <div class="cell large-2" style="margin-left: 50px">
-        Foto
+    <div class="cell large-2" style="margin-left: 70px; margin-top: 50px">
+        <h3 style="color: #F15A24">Upload Profielfoto</h3>
+        <div class="loader"></div>
+            <script>
+                $(document).ready(function() {
+                    $('#png').hide();
+                    $('#pdf').hide();
+                    $('.loader').hide();
+                    let uploader = new ss.SimpleUpload({
+                        button: "upload",
+                        url: "{{ path('upload_file') }}",
+                        name: 'file', // upload parameter name die gebruikt wordt in de controller
+                        responseType: 'json',
+                        allowedExtensions: ['png', 'jpg', 'jpeg', 'pdf'],
+                        hoverClass: 'hover-class-upload',
+                        focusClass: 'hover-class-upload',
+                        multiple: false,
+                        disabledClass: 'ui-state-disabled',
+                        autoSubmit: true,
+                        onSizeError: function() {
+                            alert('File may not exceed 100MB');
+                        },
+                        onExtError: function() {
+                            alert('Invalid file type. Please use a PNG, JPG or JPEG or PDF file');
+                        },
+                        onSubmit: function( filename, extension, uploadBtn, fileSize ) {
+                            $('#upload').hide(); $('#pdf').hide(); $('#png').hide();
+                            $('.loader').show();
+                            return(true);
+                        },
+                        onComplete: function (filename, response) {
+                            if(response.success === false) {
+                                alert(response.errors);
+                            } else {
+                                let str = response.file_id;
+                                if(str.slice(str.length - 3) == "pdf"){
+                                    $('#pdf').show();
+                                    $('#png').hide();
+                                }else{
+                                    $('#upload').attr("src", "/" + str);
+                                    $('#pdf').hide();
+                                }
+                                console.log(response.file_id);
+                                $('#upload').show();
+                                $('.loader').hide();
+                            }
+                        }
+                    });
+                });
+            </script>    
+        <img src="/screenshots/uploadFoto.jpg" id="upload" style="width: 150px; height: 150px">
     </div>
     <div class="cell large-9">
         <h1 style="color: #F15A24; margin-bottom: 30px">Mijn Profiel</h1>

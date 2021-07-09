@@ -56,12 +56,6 @@ class ProfielWGController extends AbstractController
         return($this->redirectToRoute('profielWG'));
     }
 
-    public function importeerSpreadsheet(){
-
-        //Commando
-        $this->us->toevoegenUser($database);
-    }
-
     /**
      * @Route("/formvac", name="formvac")
      */

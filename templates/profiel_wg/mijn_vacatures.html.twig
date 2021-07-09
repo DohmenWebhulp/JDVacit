@@ -34,7 +34,7 @@
                     <td>{{vacature.datum | date('Y/m/d')}}</td>
                     <td>{{vacature.titel}}</td>
                     <td>{{vacature.sollicitaties | length}}</td>
-                    <td><a href="{{ path('mijn_vacsol' , { 'vac_id': vacature.id}) }}">Bekijk alle sollicitaties</a></td>
+                    <td><a href="{{ path('mijn_vacsol' , { 'vac_id': vacature.id}) }}" style="color: black; font-weight: unset">Bekijk alle sollicitaties</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

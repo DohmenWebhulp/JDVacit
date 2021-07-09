@@ -16,6 +16,7 @@
 <div class="addon"></div>
 <div class="grid-x" style="color: #F15A24">
     <div class="cell large-2" style="margin-left: 70px; margin-top: 50px">
+        <h3 style="color: #F15A24">Upload Profielfoto</h3>
         <div class="loader"></div>
             <script>
                 $(document).ready(function() {
@@ -64,7 +65,7 @@
                     });
                 });
             </script>    
-        <img src="/screenshots/windows.png" id="upload" style="width: 150px; height: 150px">
+        <img src="/screenshots/uploadFoto.jpg" id="upload" style="width: 150px; height: 150px">
     </div>
     <div class="cell large-9">
         <h1 style="color: #F15A24; margin-top: 30px; margin-bottom: 30px">Mijn Profiel</h1>
@@ -88,11 +89,11 @@
                 <label for="inputAdres">Adres</label>
                 <input type="text" value="{{user.adres}}" name="adres" id="inputAdres" class="form-control rc form">
                 <div class="grid-x">
-                    <div class="cell small-4" style="margin-right: 30px">
+                    <div class="cell large-4 small-12" style="margin-right: 30px">
                         <label for="inputPostcode">Postcode</label>
                         <input type="text" value="{{user.postcode}}" name="postcode" id="inputPostcode" class="form-control rc form">
                     </div>
-                    <div class="cell small-7">
+                    <div class="cell large-7 small-12">
                         <label for="inputWoonplaats">Woonplaats</label>
                         <input type="text" value="{{user.woonplaats}}" name="woonplaats" id="inputWoonplaats" class="form-control rc form">
                     </div>
@@ -123,7 +124,7 @@
             </button>
             <div style="clear: both"></div>
         </form>
-        <h1 style="color: #F15A24">Upload your CV</h1>
+        <h1 style="color: #F15A24">Upload CV</h1>
             <script>
                 $(document).ready(function() {
                     $('#png').hide();
