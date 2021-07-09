@@ -15,13 +15,59 @@
 </div>
 <div class="addon"></div>
 <div class="grid-x" style="color: #F15A24">
-    <div class="cell large-2" style="margin-left: 50px">
+    <div class="cell large-2" style="margin-left: 70px; margin-top: 50px">
         <div class="loader"></div>
-        <!--<div class="uploadstyle" id="upload">Foto</div>-->
-        <img src="/screenshots/windows.png" id="upload">
+            <script>
+                $(document).ready(function() {
+                    $('#png').hide();
+                    $('#pdf').hide();
+                    $('.loader').hide();
+                    let uploader = new ss.SimpleUpload({
+                        button: "upload",
+                        url: "{{ path('upload_file') }}",
+                        name: 'file', // upload parameter name die gebruikt wordt in de controller
+                        responseType: 'json',
+                        allowedExtensions: ['png', 'jpg', 'jpeg', 'pdf'],
+                        hoverClass: 'hover-class-upload',
+                        focusClass: 'hover-class-upload',
+                        multiple: false,
+                        disabledClass: 'ui-state-disabled',
+                        autoSubmit: true,
+                        onSizeError: function() {
+                            alert('File may not exceed 100MB');
+                        },
+                        onExtError: function() {
+                            alert('Invalid file type. Please use a PNG, JPG or JPEG or PDF file');
+                        },
+                        onSubmit: function( filename, extension, uploadBtn, fileSize ) {
+                            $('#upload').hide(); $('#pdf').hide(); $('#png').hide();
+                            $('.loader').show();
+                            return(true);
+                        },
+                        onComplete: function (filename, response) {
+                            if(response.success === false) {
+                                alert(response.errors);
+                            } else {
+                                let str = response.file_id;
+                                if(str.slice(str.length - 3) == "pdf"){
+                                    $('#pdf').show();
+                                    $('#png').hide();
+                                }else{
+                                    $('#upload').attr("src", "/" + str);
+                                    $('#pdf').hide();
+                                }
+                                console.log(response.file_id);
+                                $('#upload').show();
+                                $('.loader').hide();
+                            }
+                        }
+                    });
+                });
+            </script>    
+        <img src="/screenshots/windows.png" id="upload" style="width: 150px; height: 150px">
     </div>
     <div class="cell large-9">
-        <h1 style="color: #F15A24; margin-bottom: 30px">Mijn Profiel</h1>
+        <h1 style="color: #F15A24; margin-top: 30px; margin-bottom: 30px">Mijn Profiel</h1>
         <form action="{{path('bijwerkenWN')}}" method="POST">
             <div class="form">
                 <label for="inputGebruikersnaam">Gebruikersnaam</label>
@@ -84,7 +130,7 @@
                     $('#pdf').hide();
                     $('.loader').hide();
                     let uploader = new ss.SimpleUpload({
-                        button: "upload",
+                        button: "upload2",
                         url: "{{ path('upload_file') }}",
                         name: 'file', // upload parameter name die gebruikt wordt in de controller
                         responseType: 'json',
@@ -101,7 +147,7 @@
                             alert('Invalid file type. Please use a PNG, JPG or JPEG or PDF file');
                         },
                         onSubmit: function( filename, extension, uploadBtn, fileSize ) {
-                            $('#upload').hide(); $('#pdf').hide(); $('#png').hide();
+                            $('#upload2').hide(); $('#pdf').hide(); $('#png').hide();
                             $('.loader').show();
                             return(true);
                         },
@@ -114,15 +160,14 @@
                                     $('#pdf').show();
                                     $('#png').hide();
                                 }else{
-                                    console.log
-                                    $('#upload').attr("src", "/" . str);
-                                    //$('#png').show();
+                                    //$('#upload2').attr("src", "/" + str);
+                                    $('#png').show();
                                     $('#pdf').hide();
                                 }
                                 console.log(response.file_id);
                                 let sub = str.substring(21, str.length);
-                                //$('#upload').text(sub);
-                                $('#upload').show();
+                                $('#upload2').text(sub);
+                                $('#upload2').show();
                                 $('.loader').hide();
                             }
                         }
@@ -130,13 +175,13 @@
                 });
             </script>     
             <div class="grid-x">
-                <div class="cell large-2">
+                <div class="cell large-1">
                     <i class="fas fa-file-pdf fa-2x" id="pdf" style="color: #F15A24"></i>
                     <i class="fas fa-file-image fa-2x" id="png" style="color: #F15A24"></i>
                     <div class="loader"></div>
                 </div>
                 <div class="cell large-8">
-                    <div class="uploadstyle" id="upload2">Upload</div>
+                    <div class="uploadstyle" id="upload2" >Upload</div>
                 </div>
             </div>
     </div>

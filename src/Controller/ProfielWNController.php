@@ -90,7 +90,7 @@ class ProfielWNController extends AbstractController
 
         $userWN = $this->us->toevoegenUser($user);
 
-        return($this->redirectToRoute('homepage'));
+        return($this->redirectToRoute('app_login'));
     }
 
     /**

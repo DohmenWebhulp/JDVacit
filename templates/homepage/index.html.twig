@@ -7,12 +7,15 @@
     <h1 class="logos">VACIT</h1>
     <div class="box-content">
         <div class="buttons">
-        {% if user.roles[0] == "ROLE_CANDIDATE" %}
-            <a href="{{path('profielWN')}}">MIJN PROFIEL</a>
-        {% else %}
-            <a href="{{path('profielWG')}}">MIJN PROFIEL</a>
-            <a href="{{path('formvac')}}">TOEVOEGEN VACATURE</a>
-        {% endif %}
+            {% if user != null %}
+                {% if user.roles[0] == "ROLE_CANDIDATE" %}
+                    <a href="{{path('profielWN')}}">MIJN PROFIEL</a>
+                {% else %}
+                    <a href="{{path('profielWG')}}">MIJN PROFIEL</a>
+                    <a href="{{path('formvac')}}">TOEVOEGEN VACATURE</a>
+                {% endif %}
+            {% endif %}
+            <a href="{{path('app_login')}}">INLOGGEN</a>
             <a href="{{path('registerlink')}}">REGISTREREN</a>
         </div>
     </div>

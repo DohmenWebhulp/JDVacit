@@ -7,11 +7,15 @@
     <h1 class="logos">VACIT</h1>
     <div class="box-content">
         <div class="buttons">
-            {% if user.roles[0] == "ROLE_CANDIDATE" %}
-            <a href="{{path('profielWN')}}">MIJN PROFIEL</a>
-            {% else %}
-            <a href="{{path('profielWG')}}">MIJN PROFIEL</a>
+            {% if user != null %}
+                {% if user.roles[0] == "ROLE_CANDIDATE" %}
+                    <a href="{{path('profielWN')}}">MIJN PROFIEL</a>
+                {% else %}
+                    <a href="{{path('profielWG')}}">MIJN PROFIEL</a>
+                {% endif %}
             {% endif %}
+            <a href="{{path('app_login')}}">INLOGGEN</a>
+            <a href="{{path('registerlink')}}">REGISTREREN</a>
             <a href="{{path('homepage')}}">HOMEPAGE</a>
         </div>
     </div>
@@ -34,8 +38,10 @@
         <div style="clear: both"></div>
         <div class="omsch">{{data.omschrijving}}</div>
         <div style="margin-top: 30px; margin-bottom: 30px">
-            {% if user.roles[0] == "ROLE_CANDIDATE" %}
-                <input type="submit" id="sllctrn" value="Solliciteer Nu!">
+            {% if user != null %}
+                {% if user.roles[0] == "ROLE_CANDIDATE" %}
+                    <input type="submit" id="sllctrn" value="Solliciteer Nu!">
+                {% endif %}
             {% endif %}
         </div>
         <h2> Meer Vacatures van {{data.userWG.gebruikersnaam}}</h2>

@@ -8,6 +8,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,9 +20,10 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, UserPasswordEncoderInterface $encoder)
     {
         parent::__construct($registry, User::class);
+        $this->encoder = $encoder;
     }
 
     /**
@@ -55,7 +59,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         $user->setEmail($userA["email"]);
         $user->setRoles($userA["roles"]);
-        $user->setPassword($userA["password"]);
+
+        $user->setPassword(
+            $this->encoder->encodePassword(
+                $user,
+                $userA["password"]
+            )
+        );
+
         $user->setRecordType($userA["record_type"]);
         $user->setGebruikersnaam($userA["gebruikersnaam"]);
         $user->setAdres($userA["adres"]);
