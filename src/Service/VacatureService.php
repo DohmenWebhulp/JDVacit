@@ -29,10 +29,10 @@ class VacatureService{
         
         $vacss = [];
         $vacs = $this->vacRep->sorteerVacatures();
-        for($i = 0; $i < 5; $i++){
+  
+        for($i = 0; $i < min(5, count($vacs)); $i++){
             $vacss[] = $vacs[$i];
         }
-        
         return($vacss);
     }
 

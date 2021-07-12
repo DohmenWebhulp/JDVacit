@@ -82,7 +82,8 @@ class ProfielWGController extends AbstractController
             "omschrijving" => $_POST['omschrijving'],
             "niveau" => $_POST['niveau'],
             "datum" => new \DateTime(date('Y/m/d h:i:s a', time())),
-            "user_wg_id" => $uid
+            "user_wg_id" => $uid,
+            "platform_id" => $_POST['platform']
         ];
 
         $data = $this->vs->toevoegenVacature($vaca);

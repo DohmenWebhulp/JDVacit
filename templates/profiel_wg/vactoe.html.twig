@@ -4,30 +4,33 @@
 
 {% block body %}
 <div class="box">
+    <h1 class="logos">VACIT</h1>
     <div class="box-content">
-        <div class="button">
+        <div class="buttons">
             <a href="{{path('homepage')}}">HOMEPAGE</a>
         </div>
     </div>
 </div>
-<div class="formu">
-    <h1>Vacature details</h1>
-    <form action="{{path('vactoe')}}" method="POST">
-        <div style="margin-left: 50px">
-            <div style="color: black">Titel:</div>
-            <input type="text" name="titel" value="">
-        </div>
-        <div style="margin-left: 50px; margin-top: 20px">
-            <div style="color: black">Omschrijving:</div>
-            <input type="text" name="omschrijving" value="">
-        </div>
-        <div style="margin-left: 50px; margin-top: 20px">
-            <div style="color: black">Niveau:</div>
-            <input type="text" name="niveau" value="">
-        </div>
-        <div style="margin-top: 20px; margin-left: 50px">
-            <input type="submit" class="btn btn-primary butn" value="Verzenden">
-        </div>
-    </form>
+<div class="addon"></div>
+<div class="grid-x">
+    <div class="cell large-10 small-11">
+        <form action="{{path('vactoe')}}" style="margin-left: 5%" method="POST">
+            <h1 style="color: #F15A24; margin-top: 30px; margin-bottom: 30px">Voeg uw vacature toe</h1>
+                <label for="inputTitel">Titel</label>
+                <input type="text" name="titel" id="inputTitel" value="">
+                <label for="inputOmschrijving">Omschrijving</label>
+                <input type="text" name="omschrijving" id="inputOmschrijving" value="">
+                <label for="inputNiveau">Niveau</label>
+                <input type="text" name="niveau" id="inputNiveau" value="">
+                <label for="inputPlatform">Platform</label>
+                <input type="text" name="platform" id="inputPlatform" value="">
+                <button class="btn btn-lg btn-primary flotr" 
+                    style="margin-top: 20px; margin-bottom: 20px; background-color: white; border: 0" 
+                    type="submit">
+                <h2 style="color: #F15A24"><i class="fas fa-arrow-right"></i> Opslaan</h2>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}
