@@ -38,7 +38,7 @@ De site heeft diverse pagina's, te weten:
 * Symfony
 * Design pattern Model View Controller
 
-Met behulp van het Symfony framework in PHP is de communicatie van de backend code met de achterliggende database veel gemakkelijker geworden. Tevens is het design pattern Model View Controller geïmplementeerd, waardoor de code is onderverdeeld in controllers, services, repositories en entities. Ook is er een command klasse gemaakt waardoor werkgevers hun informatie vanuit een spreadsheet kunnen importeren. Met Datatables.net worden de tabellen mooer aangekleed.
+Met behulp van het Symfony framework in PHP is de communicatie van de backend code met de achterliggende database veel gemakkelijker geworden. Tevens is het design pattern Model View Controller geïmplementeerd, waardoor de code is onderverdeeld in controllers, services, repositories en entities. Ook is er een command klasse gemaakt waardoor werkgevers hun informatie vanuit een spreadsheet kunnen importeren. Met Datatables.net worden de tabellen mooier aangekleed.
 
 ## Methoden en Technieken
 
